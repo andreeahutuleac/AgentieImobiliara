@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AgentieImobiliaraDB" Class="AgentieDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ANDREEA;Initial Catalog=AgentieImobiliaraDB;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="AgentieImobiliara.Properties.Settings" SettingsPropertyName="AgentieImobiliaraDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Agent" Member="Agents">
+    <Type Name="Agent">
+      <Column Name="AgentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NrLicenta" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="NumeAgentie" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AdresaAgentie" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="AniExperienta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Agent_LegaturaPrivatAgent" Member="LegaturaPrivatAgents" ThisKey="AgentID" OtherKey="AgentID" Type="LegaturaPrivatAgent" />
+      <Association Name="User_Agent" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Anunturi_Vanzare" Member="Anunturi_Vanzares">
+    <Type Name="Anunturi_Vanzare">
+      <Column Name="AnuntID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LegaturaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DataPublicare" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DataExpirare" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StatusAnunt" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Anunturi_Vanzare_Anunturi_vizualizate" Member="Anunturi_vizualizates" ThisKey="AnuntID" OtherKey="AnuntID" Type="Anunturi_vizualizate" />
+      <Association Name="LegaturaPrivatAgent_Anunturi_Vanzare" Member="LegaturaPrivatAgent" ThisKey="LegaturaID" OtherKey="LegaturaID" Type="LegaturaPrivatAgent" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Anunturi_vizualizate" Member="Anunturi_vizualizates">
+    <Type Name="Anunturi_vizualizate">
+      <Column Name="VizualizareID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UtilizatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AnuntID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DataVizualizare" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Anunturi_Vanzare_Anunturi_vizualizate" Member="Anunturi_Vanzare" ThisKey="AnuntID" OtherKey="AnuntID" Type="Anunturi_Vanzare" IsForeignKey="true" />
+      <Association Name="Privat_Anunturi_vizualizate" Member="Privat" ThisKey="UtilizatorID" OtherKey="PrivatID" Type="Privat" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Apartament" Member="Apartaments">
+    <Type Name="Apartament">
+      <Column Name="ApartamentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProprietateID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StadiuConstructie" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Compartimentare" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Mobilat_Utilat" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="NrCamere" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NrBai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Etaj" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Parcare" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Garaj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Curte" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CentralaTermica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Balcon" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Lift" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Gradina" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Terasa" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Proprietate_Apartament" Member="Proprietate" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="Proprietate" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Casa" Member="Casas">
+    <Type Name="Casa">
+      <Column Name="CasaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProprietateID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StadiuConstructie" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Mobilat_Utilat" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="NrCamere" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NrBai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NrEtaje" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Parcare" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Garaj" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Curte" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CentralaTermica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Gradina" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Piscina" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Canalizare" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Proprietate_Casa" Member="Proprietate" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="Proprietate" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LegaturaPrivatAgent" Member="LegaturaPrivatAgents">
+    <Type Name="LegaturaPrivatAgent">
+      <Column Name="LegaturaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PrivatID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProprietateID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AgentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TipVanzare" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="LegaturaPrivatAgent_Anunturi_Vanzare" Member="Anunturi_Vanzares" ThisKey="LegaturaID" OtherKey="LegaturaID" Type="Anunturi_Vanzare" />
+      <Association Name="Agent_LegaturaPrivatAgent" Member="Agent" ThisKey="AgentID" OtherKey="AgentID" Type="Agent" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Privat_LegaturaPrivatAgent" Member="Privat" ThisKey="PrivatID" OtherKey="PrivatID" Type="Privat" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Proprietate_LegaturaPrivatAgent" Member="Proprietate" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="Proprietate" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Privat" Member="Privats">
+    <Type Name="Privat">
+      <Column Name="PrivatID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Localitate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Privat_Anunturi_vizualizate" Member="Anunturi_vizualizates" ThisKey="PrivatID" OtherKey="UtilizatorID" Type="Anunturi_vizualizate" />
+      <Association Name="Privat_LegaturaPrivatAgent" Member="LegaturaPrivatAgents" ThisKey="PrivatID" OtherKey="PrivatID" Type="LegaturaPrivatAgent" />
+      <Association Name="User_Privat" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Proprietate" Member="Proprietates">
+    <Type Name="Proprietate">
+      <Column Name="ProprietateID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TipProprietate" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Inchiriere_Vanzare" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Denumire" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Descriere" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Localitate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Judet" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Pret" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Suprafata" Type="System.Decimal" DbType="Decimal(7,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Proprietate_Apartament" Member="Apartaments" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="Apartament" />
+      <Association Name="Proprietate_Casa" Member="Casas" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="Casa" />
+      <Association Name="Proprietate_LegaturaPrivatAgent" Member="LegaturaPrivatAgents" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="LegaturaPrivatAgent" />
+      <Association Name="Proprietate_SpatiuComercial" Member="SpatiuComercials" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="SpatiuComercial" />
+      <Association Name="Proprietate_Teren" Member="Terens" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="Teren" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SpatiuComercial" Member="SpatiuComercials">
+    <Type Name="SpatiuComercial">
+      <Column Name="SpatiuID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProprietateID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StadiuConstructie" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TipSpatiu" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Proprietate_SpatiuComercial" Member="Proprietate" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="Proprietate" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Teren" Member="Terens">
+    <Type Name="Teren">
+      <Column Name="TerenID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProprietateID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TipTeren" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Gaz" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Electricitate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Apa" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Canalizare" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Proprietate_Teren" Member="Proprietate" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="Proprietate" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserType" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PasswordHashed" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="Nume" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Prenume" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NrTelefon" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="isActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DataCreare" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_Agent" Member="Agents" ThisKey="UserID" OtherKey="UserID" Type="Agent" />
+      <Association Name="User_Privat" Member="Privats" ThisKey="UserID" OtherKey="UserID" Type="Privat" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Judete" Member="Judetes">
+    <Type Name="Judete">
+      <Column Name="JudetID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Denumire" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
