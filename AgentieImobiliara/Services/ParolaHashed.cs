@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 
-namespace Agentie_MVVM.Services
+namespace AgentieImobiliara.Services
 {
     public static class ParolaHashed
     {

@@ -11,7 +11,6 @@ namespace AgentieImobiliara.Models
     {
         public Users User { get; set; }
         public int PrivatID { get; set; }
-        public string Localitate { get; set; }
         public string UserPrivatType { get; set; } // 'Cumparator', 'Vanzator'
 
 
@@ -24,5 +23,18 @@ namespace AgentieImobiliara.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         //implementare metode
+
+        public void InregistrarePrivatUser(Users user)
+        {
+            try
+            {
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Eroare la inregistrare Privat: {ex.Message}");
+            }
+        }
     }
 }

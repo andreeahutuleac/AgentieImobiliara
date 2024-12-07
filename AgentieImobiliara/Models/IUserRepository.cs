@@ -10,13 +10,14 @@ namespace AgentieImobiliara.Models
 {
     public interface IUserRepository
     {
-        bool AutentificareUser(NetworkCredential credential);
-        void InregistrareUser(Users user);
-        void UpdateUser(Users user);
-        void Stergere(int id);
-        Users GetUserById(int id);
-        Users GetUserByUsername(string username);
+       bool AutentificareUser(NetworkCredential credential);
+       //void InregistrarePrivatUser(Users user);
+        //void InregistrareAgentUser(Users user);
+       // void UpdateUser(Users user);
+        //void Stergere(int id);
+        //Users GetUserById(int id);
+        //Users GetUserByUsername(string username);
 
-        ObservableCollection<Users> GetAllUsers();
+        //ObservableCollection<Users> GetAllUsers();
     }
 }

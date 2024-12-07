@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 using System.Security;
 using System.Windows.Input;
 using System.IO.Packaging;
+using AgentieImobiliara.Models;
+using System.Net;
+using System.Windows;
 
 namespace AgentieImobiliara.ViewModels
 {
     public class ConectareViewModel:BaseViewModel
     {
+        private readonly IUserRepository _userRepository;
         private string _email;
         private SecureString _password;
         private string _errorMessage;
@@ -73,7 +77,20 @@ namespace AgentieImobiliara.ViewModels
 
         private void ExecuteConectareCommand(object obj)
         {
-           throw new NotImplementedException();
+            var credential = new NetworkCredential(Email, new System.Net.NetworkCredential(string.Empty, Password).Password);
+
+            bool isAuthenticated = _userRepository.AutentificareUser(credential);
+
+            if (isAuthenticated)
+            {
+                ErrorMessage = string.Empty;
+                MessageBox.Show("Autentificare reusita!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                ErrorMessage = "Email sau parola incorecta!";
+            }
         }
     }
+    
 }

@@ -61,7 +61,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\ConectareViewModel.cs" />
-    <Compile Include="ViewModels\InregistrareViewModel.cs" />
+    <Compile Include="ViewModels\Inregistrare.cs" />
     <Compile Include="Views\Conectare.xaml.cs">
       <DependentUpon>Conectare.xaml</DependentUpon>
     </Compile>
