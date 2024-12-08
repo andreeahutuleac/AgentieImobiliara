@@ -58,7 +58,7 @@ namespace AgentieImobiliara.ViewModels
         }
 
         public ICommand ConectareCommand { get; }
-        public ICommand ShowPasswordCommand { get; }
+        //public ICommand ShowPasswordCommand { get; }
 
         public ConectareViewModel()
         {

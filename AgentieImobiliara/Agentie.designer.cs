@@ -30,9 +30,6 @@ namespace AgentieImobiliara
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAgent(Agent instance);
-    partial void UpdateAgent(Agent instance);
-    partial void DeleteAgent(Agent instance);
     partial void InsertAnunturi_Vanzare(Anunturi_Vanzare instance);
     partial void UpdateAnunturi_Vanzare(Anunturi_Vanzare instance);
     partial void DeleteAnunturi_Vanzare(Anunturi_Vanzare instance);
@@ -48,9 +45,6 @@ namespace AgentieImobiliara
     partial void InsertLegaturaPrivatAgent(LegaturaPrivatAgent instance);
     partial void UpdateLegaturaPrivatAgent(LegaturaPrivatAgent instance);
     partial void DeleteLegaturaPrivatAgent(LegaturaPrivatAgent instance);
-    partial void InsertPrivat(Privat instance);
-    partial void UpdatePrivat(Privat instance);
-    partial void DeletePrivat(Privat instance);
     partial void InsertProprietate(Proprietate instance);
     partial void UpdateProprietate(Proprietate instance);
     partial void DeleteProprietate(Proprietate instance);
@@ -66,6 +60,12 @@ namespace AgentieImobiliara
     partial void InsertJudete(Judete instance);
     partial void UpdateJudete(Judete instance);
     partial void DeleteJudete(Judete instance);
+    partial void InsertPrivat(Privat instance);
+    partial void UpdatePrivat(Privat instance);
+    partial void DeletePrivat(Privat instance);
+    partial void InsertAgent(Agent instance);
+    partial void UpdateAgent(Agent instance);
+    partial void DeleteAgent(Agent instance);
     #endregion
 		
 		public AgentieDataContext() : 
@@ -96,14 +96,6 @@ namespace AgentieImobiliara
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Agent> Agents
-		{
-			get
-			{
-				return this.GetTable<Agent>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Anunturi_Vanzare> Anunturi_Vanzares
@@ -146,14 +138,6 @@ namespace AgentieImobiliara
 			}
 		}
 		
-		public System.Data.Linq.Table<Privat> Privats
-		{
-			get
-			{
-				return this.GetTable<Privat>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Proprietate> Proprietates
 		{
 			get
@@ -193,256 +177,21 @@ namespace AgentieImobiliara
 				return this.GetTable<Judete>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Agent")]
-	public partial class Agent : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _AgentID;
-		
-		private System.Nullable<int> _UserID;
-		
-		private string _NrLicenta;
-		
-		private string _NumeAgentie;
-		
-		private string _AdresaAgentie;
-		
-		private int _AniExperienta;
-		
-		private EntitySet<LegaturaPrivatAgent> _LegaturaPrivatAgents;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAgentIDChanging(int value);
-    partial void OnAgentIDChanged();
-    partial void OnUserIDChanging(System.Nullable<int> value);
-    partial void OnUserIDChanged();
-    partial void OnNrLicentaChanging(string value);
-    partial void OnNrLicentaChanged();
-    partial void OnNumeAgentieChanging(string value);
-    partial void OnNumeAgentieChanged();
-    partial void OnAdresaAgentieChanging(string value);
-    partial void OnAdresaAgentieChanged();
-    partial void OnAniExperientaChanging(int value);
-    partial void OnAniExperientaChanged();
-    #endregion
-		
-		public Agent()
-		{
-			this._LegaturaPrivatAgents = new EntitySet<LegaturaPrivatAgent>(new Action<LegaturaPrivatAgent>(this.attach_LegaturaPrivatAgents), new Action<LegaturaPrivatAgent>(this.detach_LegaturaPrivatAgents));
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AgentID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int AgentID
+		public System.Data.Linq.Table<Privat> Privats
 		{
 			get
 			{
-				return this._AgentID;
-			}
-			set
-			{
-				if ((this._AgentID != value))
-				{
-					this.OnAgentIDChanging(value);
-					this.SendPropertyChanging();
-					this._AgentID = value;
-					this.SendPropertyChanged("AgentID");
-					this.OnAgentIDChanged();
-				}
+				return this.GetTable<Privat>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
-		public System.Nullable<int> UserID
+		public System.Data.Linq.Table<Agent> Agents
 		{
 			get
 			{
-				return this._UserID;
+				return this.GetTable<Agent>();
 			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NrLicenta", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string NrLicenta
-		{
-			get
-			{
-				return this._NrLicenta;
-			}
-			set
-			{
-				if ((this._NrLicenta != value))
-				{
-					this.OnNrLicentaChanging(value);
-					this.SendPropertyChanging();
-					this._NrLicenta = value;
-					this.SendPropertyChanged("NrLicenta");
-					this.OnNrLicentaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeAgentie", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string NumeAgentie
-		{
-			get
-			{
-				return this._NumeAgentie;
-			}
-			set
-			{
-				if ((this._NumeAgentie != value))
-				{
-					this.OnNumeAgentieChanging(value);
-					this.SendPropertyChanging();
-					this._NumeAgentie = value;
-					this.SendPropertyChanged("NumeAgentie");
-					this.OnNumeAgentieChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdresaAgentie", DbType="VarChar(100)")]
-		public string AdresaAgentie
-		{
-			get
-			{
-				return this._AdresaAgentie;
-			}
-			set
-			{
-				if ((this._AdresaAgentie != value))
-				{
-					this.OnAdresaAgentieChanging(value);
-					this.SendPropertyChanging();
-					this._AdresaAgentie = value;
-					this.SendPropertyChanged("AdresaAgentie");
-					this.OnAdresaAgentieChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AniExperienta", DbType="Int NOT NULL")]
-		public int AniExperienta
-		{
-			get
-			{
-				return this._AniExperienta;
-			}
-			set
-			{
-				if ((this._AniExperienta != value))
-				{
-					this.OnAniExperientaChanging(value);
-					this.SendPropertyChanging();
-					this._AniExperienta = value;
-					this.SendPropertyChanged("AniExperienta");
-					this.OnAniExperientaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Agent_LegaturaPrivatAgent", Storage="_LegaturaPrivatAgents", ThisKey="AgentID", OtherKey="AgentID")]
-		public EntitySet<LegaturaPrivatAgent> LegaturaPrivatAgents
-		{
-			get
-			{
-				return this._LegaturaPrivatAgents;
-			}
-			set
-			{
-				this._LegaturaPrivatAgents.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Agent", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Agents.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Agents.Add(this);
-						this._UserID = value.UserID;
-					}
-					else
-					{
-						this._UserID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_LegaturaPrivatAgents(LegaturaPrivatAgent entity)
-		{
-			this.SendPropertyChanging();
-			entity.Agent = this;
-		}
-		
-		private void detach_LegaturaPrivatAgents(LegaturaPrivatAgent entity)
-		{
-			this.SendPropertyChanging();
-			entity.Agent = null;
 		}
 	}
 	
@@ -1785,11 +1534,11 @@ namespace AgentieImobiliara
 		
 		private EntitySet<Anunturi_Vanzare> _Anunturi_Vanzares;
 		
-		private EntityRef<Agent> _Agent;
+		private EntityRef<Proprietate> _Proprietate;
 		
 		private EntityRef<Privat> _Privat;
 		
-		private EntityRef<Proprietate> _Proprietate;
+		private EntityRef<Agent> _Agent;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1810,9 +1559,9 @@ namespace AgentieImobiliara
 		public LegaturaPrivatAgent()
 		{
 			this._Anunturi_Vanzares = new EntitySet<Anunturi_Vanzare>(new Action<Anunturi_Vanzare>(this.attach_Anunturi_Vanzares), new Action<Anunturi_Vanzare>(this.detach_Anunturi_Vanzares));
-			this._Agent = default(EntityRef<Agent>);
-			this._Privat = default(EntityRef<Privat>);
 			this._Proprietate = default(EntityRef<Proprietate>);
+			this._Privat = default(EntityRef<Privat>);
+			this._Agent = default(EntityRef<Agent>);
 			OnCreated();
 		}
 		
@@ -1941,36 +1690,36 @@ namespace AgentieImobiliara
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Agent_LegaturaPrivatAgent", Storage="_Agent", ThisKey="AgentID", OtherKey="AgentID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Agent Agent
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proprietate_LegaturaPrivatAgent", Storage="_Proprietate", ThisKey="ProprietateID", OtherKey="ProprietateID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Proprietate Proprietate
 		{
 			get
 			{
-				return this._Agent.Entity;
+				return this._Proprietate.Entity;
 			}
 			set
 			{
-				Agent previousValue = this._Agent.Entity;
+				Proprietate previousValue = this._Proprietate.Entity;
 				if (((previousValue != value) 
-							|| (this._Agent.HasLoadedOrAssignedValue == false)))
+							|| (this._Proprietate.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Agent.Entity = null;
+						this._Proprietate.Entity = null;
 						previousValue.LegaturaPrivatAgents.Remove(this);
 					}
-					this._Agent.Entity = value;
+					this._Proprietate.Entity = value;
 					if ((value != null))
 					{
 						value.LegaturaPrivatAgents.Add(this);
-						this._AgentID = value.AgentID;
+						this._ProprietateID = value.ProprietateID;
 					}
 					else
 					{
-						this._AgentID = default(Nullable<int>);
+						this._ProprietateID = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Agent");
+					this.SendPropertyChanged("Proprietate");
 				}
 			}
 		}
@@ -2009,36 +1758,36 @@ namespace AgentieImobiliara
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proprietate_LegaturaPrivatAgent", Storage="_Proprietate", ThisKey="ProprietateID", OtherKey="ProprietateID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Proprietate Proprietate
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Agent_LegaturaPrivatAgent", Storage="_Agent", ThisKey="AgentID", OtherKey="AgentID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Agent Agent
 		{
 			get
 			{
-				return this._Proprietate.Entity;
+				return this._Agent.Entity;
 			}
 			set
 			{
-				Proprietate previousValue = this._Proprietate.Entity;
+				Agent previousValue = this._Agent.Entity;
 				if (((previousValue != value) 
-							|| (this._Proprietate.HasLoadedOrAssignedValue == false)))
+							|| (this._Agent.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Proprietate.Entity = null;
+						this._Agent.Entity = null;
 						previousValue.LegaturaPrivatAgents.Remove(this);
 					}
-					this._Proprietate.Entity = value;
+					this._Agent.Entity = value;
 					if ((value != null))
 					{
 						value.LegaturaPrivatAgents.Add(this);
-						this._ProprietateID = value.ProprietateID;
+						this._AgentID = value.AgentID;
 					}
 					else
 					{
-						this._ProprietateID = default(Nullable<int>);
+						this._AgentID = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Proprietate");
+					this.SendPropertyChanged("Agent");
 				}
 			}
 		}
@@ -2073,213 +1822,6 @@ namespace AgentieImobiliara
 		{
 			this.SendPropertyChanging();
 			entity.LegaturaPrivatAgent = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Privat")]
-	public partial class Privat : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _PrivatID;
-		
-		private System.Nullable<int> _UserID;
-		
-		private string _Localitate;
-		
-		private EntitySet<Anunturi_vizualizate> _Anunturi_vizualizates;
-		
-		private EntitySet<LegaturaPrivatAgent> _LegaturaPrivatAgents;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnPrivatIDChanging(int value);
-    partial void OnPrivatIDChanged();
-    partial void OnUserIDChanging(System.Nullable<int> value);
-    partial void OnUserIDChanged();
-    partial void OnLocalitateChanging(string value);
-    partial void OnLocalitateChanged();
-    #endregion
-		
-		public Privat()
-		{
-			this._Anunturi_vizualizates = new EntitySet<Anunturi_vizualizate>(new Action<Anunturi_vizualizate>(this.attach_Anunturi_vizualizates), new Action<Anunturi_vizualizate>(this.detach_Anunturi_vizualizates));
-			this._LegaturaPrivatAgents = new EntitySet<LegaturaPrivatAgent>(new Action<LegaturaPrivatAgent>(this.attach_LegaturaPrivatAgents), new Action<LegaturaPrivatAgent>(this.detach_LegaturaPrivatAgents));
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrivatID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int PrivatID
-		{
-			get
-			{
-				return this._PrivatID;
-			}
-			set
-			{
-				if ((this._PrivatID != value))
-				{
-					this.OnPrivatIDChanging(value);
-					this.SendPropertyChanging();
-					this._PrivatID = value;
-					this.SendPropertyChanged("PrivatID");
-					this.OnPrivatIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
-		public System.Nullable<int> UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Localitate", DbType="VarChar(50)")]
-		public string Localitate
-		{
-			get
-			{
-				return this._Localitate;
-			}
-			set
-			{
-				if ((this._Localitate != value))
-				{
-					this.OnLocalitateChanging(value);
-					this.SendPropertyChanging();
-					this._Localitate = value;
-					this.SendPropertyChanged("Localitate");
-					this.OnLocalitateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Privat_Anunturi_vizualizate", Storage="_Anunturi_vizualizates", ThisKey="PrivatID", OtherKey="UtilizatorID")]
-		public EntitySet<Anunturi_vizualizate> Anunturi_vizualizates
-		{
-			get
-			{
-				return this._Anunturi_vizualizates;
-			}
-			set
-			{
-				this._Anunturi_vizualizates.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Privat_LegaturaPrivatAgent", Storage="_LegaturaPrivatAgents", ThisKey="PrivatID", OtherKey="PrivatID")]
-		public EntitySet<LegaturaPrivatAgent> LegaturaPrivatAgents
-		{
-			get
-			{
-				return this._LegaturaPrivatAgents;
-			}
-			set
-			{
-				this._LegaturaPrivatAgents.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Privat", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Privats.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Privats.Add(this);
-						this._UserID = value.UserID;
-					}
-					else
-					{
-						this._UserID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Anunturi_vizualizates(Anunturi_vizualizate entity)
-		{
-			this.SendPropertyChanging();
-			entity.Privat = this;
-		}
-		
-		private void detach_Anunturi_vizualizates(Anunturi_vizualizate entity)
-		{
-			this.SendPropertyChanging();
-			entity.Privat = null;
-		}
-		
-		private void attach_LegaturaPrivatAgents(LegaturaPrivatAgent entity)
-		{
-			this.SendPropertyChanging();
-			entity.Privat = this;
-		}
-		
-		private void detach_LegaturaPrivatAgents(LegaturaPrivatAgent entity)
-		{
-			this.SendPropertyChanging();
-			entity.Privat = null;
 		}
 	}
 	
@@ -3149,9 +2691,9 @@ namespace AgentieImobiliara
 		
 		private System.Nullable<System.DateTime> _DataCreare;
 		
-		private EntitySet<Agent> _Agents;
-		
 		private EntitySet<Privat> _Privats;
+		
+		private EntitySet<Agent> _Agents;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3181,8 +2723,8 @@ namespace AgentieImobiliara
 		
 		public User()
 		{
-			this._Agents = new EntitySet<Agent>(new Action<Agent>(this.attach_Agents), new Action<Agent>(this.detach_Agents));
 			this._Privats = new EntitySet<Privat>(new Action<Privat>(this.attach_Privats), new Action<Privat>(this.detach_Privats));
+			this._Agents = new EntitySet<Agent>(new Action<Agent>(this.attach_Agents), new Action<Agent>(this.detach_Agents));
 			OnCreated();
 		}
 		
@@ -3386,19 +2928,6 @@ namespace AgentieImobiliara
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Agent", Storage="_Agents", ThisKey="UserID", OtherKey="UserID")]
-		public EntitySet<Agent> Agents
-		{
-			get
-			{
-				return this._Agents;
-			}
-			set
-			{
-				this._Agents.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Privat", Storage="_Privats", ThisKey="UserID", OtherKey="UserID")]
 		public EntitySet<Privat> Privats
 		{
@@ -3409,6 +2938,19 @@ namespace AgentieImobiliara
 			set
 			{
 				this._Privats.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Agent", Storage="_Agents", ThisKey="UserID", OtherKey="UserID")]
+		public EntitySet<Agent> Agents
+		{
+			get
+			{
+				return this._Agents;
+			}
+			set
+			{
+				this._Agents.Assign(value);
 			}
 		}
 		
@@ -3432,18 +2974,6 @@ namespace AgentieImobiliara
 			}
 		}
 		
-		private void attach_Agents(Agent entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Agents(Agent entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
 		private void attach_Privats(Privat entity)
 		{
 			this.SendPropertyChanging();
@@ -3451,6 +2981,18 @@ namespace AgentieImobiliara
 		}
 		
 		private void detach_Privats(Privat entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Agents(Agent entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Agents(Agent entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
@@ -3540,6 +3082,440 @@ namespace AgentieImobiliara
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Privat")]
+	public partial class Privat : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _PrivatID;
+		
+		private System.Nullable<int> _UserID;
+		
+		private EntitySet<Anunturi_vizualizate> _Anunturi_vizualizates;
+		
+		private EntitySet<LegaturaPrivatAgent> _LegaturaPrivatAgents;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPrivatIDChanging(int value);
+    partial void OnPrivatIDChanged();
+    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanged();
+    #endregion
+		
+		public Privat()
+		{
+			this._Anunturi_vizualizates = new EntitySet<Anunturi_vizualizate>(new Action<Anunturi_vizualizate>(this.attach_Anunturi_vizualizates), new Action<Anunturi_vizualizate>(this.detach_Anunturi_vizualizates));
+			this._LegaturaPrivatAgents = new EntitySet<LegaturaPrivatAgent>(new Action<LegaturaPrivatAgent>(this.attach_LegaturaPrivatAgents), new Action<LegaturaPrivatAgent>(this.detach_LegaturaPrivatAgents));
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrivatID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int PrivatID
+		{
+			get
+			{
+				return this._PrivatID;
+			}
+			set
+			{
+				if ((this._PrivatID != value))
+				{
+					this.OnPrivatIDChanging(value);
+					this.SendPropertyChanging();
+					this._PrivatID = value;
+					this.SendPropertyChanged("PrivatID");
+					this.OnPrivatIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
+		public System.Nullable<int> UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Privat_Anunturi_vizualizate", Storage="_Anunturi_vizualizates", ThisKey="PrivatID", OtherKey="UtilizatorID")]
+		public EntitySet<Anunturi_vizualizate> Anunturi_vizualizates
+		{
+			get
+			{
+				return this._Anunturi_vizualizates;
+			}
+			set
+			{
+				this._Anunturi_vizualizates.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Privat_LegaturaPrivatAgent", Storage="_LegaturaPrivatAgents", ThisKey="PrivatID", OtherKey="PrivatID")]
+		public EntitySet<LegaturaPrivatAgent> LegaturaPrivatAgents
+		{
+			get
+			{
+				return this._LegaturaPrivatAgents;
+			}
+			set
+			{
+				this._LegaturaPrivatAgents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Privat", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Privats.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Privats.Add(this);
+						this._UserID = value.UserID;
+					}
+					else
+					{
+						this._UserID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Anunturi_vizualizates(Anunturi_vizualizate entity)
+		{
+			this.SendPropertyChanging();
+			entity.Privat = this;
+		}
+		
+		private void detach_Anunturi_vizualizates(Anunturi_vizualizate entity)
+		{
+			this.SendPropertyChanging();
+			entity.Privat = null;
+		}
+		
+		private void attach_LegaturaPrivatAgents(LegaturaPrivatAgent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Privat = this;
+		}
+		
+		private void detach_LegaturaPrivatAgents(LegaturaPrivatAgent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Privat = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Agent")]
+	public partial class Agent : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AgentID;
+		
+		private System.Nullable<int> _UserID;
+		
+		private string _NrLicenta;
+		
+		private string _NumeAgentie;
+		
+		private string _AdresaAgentie;
+		
+		private int _AniExperienta;
+		
+		private EntitySet<LegaturaPrivatAgent> _LegaturaPrivatAgents;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAgentIDChanging(int value);
+    partial void OnAgentIDChanged();
+    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanged();
+    partial void OnNrLicentaChanging(string value);
+    partial void OnNrLicentaChanged();
+    partial void OnNumeAgentieChanging(string value);
+    partial void OnNumeAgentieChanged();
+    partial void OnAdresaAgentieChanging(string value);
+    partial void OnAdresaAgentieChanged();
+    partial void OnAniExperientaChanging(int value);
+    partial void OnAniExperientaChanged();
+    #endregion
+		
+		public Agent()
+		{
+			this._LegaturaPrivatAgents = new EntitySet<LegaturaPrivatAgent>(new Action<LegaturaPrivatAgent>(this.attach_LegaturaPrivatAgents), new Action<LegaturaPrivatAgent>(this.detach_LegaturaPrivatAgents));
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AgentID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int AgentID
+		{
+			get
+			{
+				return this._AgentID;
+			}
+			set
+			{
+				if ((this._AgentID != value))
+				{
+					this.OnAgentIDChanging(value);
+					this.SendPropertyChanging();
+					this._AgentID = value;
+					this.SendPropertyChanged("AgentID");
+					this.OnAgentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
+		public System.Nullable<int> UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NrLicenta", DbType="VarChar(255)")]
+		public string NrLicenta
+		{
+			get
+			{
+				return this._NrLicenta;
+			}
+			set
+			{
+				if ((this._NrLicenta != value))
+				{
+					this.OnNrLicentaChanging(value);
+					this.SendPropertyChanging();
+					this._NrLicenta = value;
+					this.SendPropertyChanged("NrLicenta");
+					this.OnNrLicentaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeAgentie", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string NumeAgentie
+		{
+			get
+			{
+				return this._NumeAgentie;
+			}
+			set
+			{
+				if ((this._NumeAgentie != value))
+				{
+					this.OnNumeAgentieChanging(value);
+					this.SendPropertyChanging();
+					this._NumeAgentie = value;
+					this.SendPropertyChanged("NumeAgentie");
+					this.OnNumeAgentieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdresaAgentie", DbType="VarChar(100)")]
+		public string AdresaAgentie
+		{
+			get
+			{
+				return this._AdresaAgentie;
+			}
+			set
+			{
+				if ((this._AdresaAgentie != value))
+				{
+					this.OnAdresaAgentieChanging(value);
+					this.SendPropertyChanging();
+					this._AdresaAgentie = value;
+					this.SendPropertyChanged("AdresaAgentie");
+					this.OnAdresaAgentieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AniExperienta", DbType="Int NOT NULL")]
+		public int AniExperienta
+		{
+			get
+			{
+				return this._AniExperienta;
+			}
+			set
+			{
+				if ((this._AniExperienta != value))
+				{
+					this.OnAniExperientaChanging(value);
+					this.SendPropertyChanging();
+					this._AniExperienta = value;
+					this.SendPropertyChanged("AniExperienta");
+					this.OnAniExperientaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Agent_LegaturaPrivatAgent", Storage="_LegaturaPrivatAgents", ThisKey="AgentID", OtherKey="AgentID")]
+		public EntitySet<LegaturaPrivatAgent> LegaturaPrivatAgents
+		{
+			get
+			{
+				return this._LegaturaPrivatAgents;
+			}
+			set
+			{
+				this._LegaturaPrivatAgents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Agent", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Agents.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Agents.Add(this);
+						this._UserID = value.UserID;
+					}
+					else
+					{
+						this._UserID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_LegaturaPrivatAgents(LegaturaPrivatAgent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Agent = this;
+		}
+		
+		private void detach_LegaturaPrivatAgents(LegaturaPrivatAgent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Agent = null;
 		}
 	}
 }

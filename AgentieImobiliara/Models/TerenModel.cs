@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace AgentieImobiliara.Models
 {
-    public class Teren:Proprietate
+    public class TerenModel:ProprietateModel
     {
         public int TerenID { get; set; }
-        public Proprietate Proprietate { get; set; }
+        public ProprietateModel Proprietate { get; set; }
         public string TipTeren { get; set; } // 'Intravilan', 'Extravilan'
         public bool Gaz { get; set; }
         public bool Electricitate { get; set; }
@@ -18,7 +18,7 @@ namespace AgentieImobiliara.Models
         public bool Canalizare { get; set; }
 
         private readonly AgentieDataContext _context;
-        public Teren()
+        public TerenModel()
         {
             _context = new AgentieDataContext();
         }
@@ -26,5 +26,25 @@ namespace AgentieImobiliara.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         //implementare metode
+
+        public Teren ConvertToTeren(TerenModel model)
+        {
+            return new Teren
+            {
+                TerenID = model.TerenID,
+                TipTeren = model.TipTeren,
+                Gaz=model.Gaz,
+                Electricitate=model.Electricitate,
+                Apa=model.Apa,
+                Canalizare=model.Canalizare
+            };
+        }
+
+        public void SaveTeren()
+        {
+            Teren teren = ConvertToTeren(this);
+            _context.Terens.InsertOnSubmit(teren);
+            _context.SubmitChanges();
+        }
     }
 }

@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace AgentieImobiliara.Models
 {
-    public class Anunturi_vanzare:INotifyPropertyChanged
+    public class Anunturi_vanzareModel:INotifyPropertyChanged
     {
         public int AnuntID { get; set; }
-        public LegaturaPrivatAgent LegaturaPrivatAgent { get; set; }
+        public LegaturaPrivatAgentModel LegaturaPrivatAgent { get; set; }
         public DateTime DataPublicare { get; set; }
         public DateTime? DataExpirare { get; set; }
         public string StatusAnunt { get; set; } // 'Activ', 'Inactiv', 'Vandut', 'Inchis'
 
 
         private readonly AgentieDataContext _context;
-        public Anunturi_vanzare()
+        public Anunturi_vanzareModel()
         {
             _context = new AgentieDataContext();
         }
@@ -25,5 +25,6 @@ namespace AgentieImobiliara.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         //implementare metode
+     
     }
 }

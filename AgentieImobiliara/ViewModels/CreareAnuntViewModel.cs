@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AgentieImobiliara.ViewModels
 {
-    internal class Inregistrare
+    public class CreareAnuntViewModel:BaseViewModel
     {
     }
 }

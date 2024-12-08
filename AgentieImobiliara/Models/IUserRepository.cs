@@ -11,8 +11,9 @@ namespace AgentieImobiliara.Models
     public interface IUserRepository
     {
        bool AutentificareUser(NetworkCredential credential);
-       //void InregistrarePrivatUser(Users user);
-        //void InregistrareAgentUser(Users user);
+       void InregistrareUser();
+        void DeconectareUser();
+  
        // void UpdateUser(Users user);
         //void Stergere(int id);
         //Users GetUserById(int id);

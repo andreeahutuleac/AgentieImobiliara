@@ -57,11 +57,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\IUserRepository.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Services\ParolaHashed.cs" />
+    <Compile Include="Services\SessionService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\ConectareViewModel.cs" />
-    <Compile Include="ViewModels\Inregistrare.cs" />
+    <Compile Include="ViewModels\CreareAnuntViewModel.cs" />
+    <Compile Include="ViewModels\DeconectareViewModel.cs" />
+    <Compile Include="ViewModels\InregistrareViewModel.cs" />
     <Compile Include="Views\Conectare.xaml.cs">
       <DependentUpon>Conectare.xaml</DependentUpon>
     </Compile>
@@ -95,17 +99,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Agent.cs" />
-    <Compile Include="Models\Anunturi_vanzare.cs" />
-    <Compile Include="Models\Anunturi_vizualizate.cs" />
-    <Compile Include="Models\Apartament.cs" />
-    <Compile Include="Models\Casa.cs" />
-    <Compile Include="Models\LegaturaPrivatAgent.cs" />
-    <Compile Include="Models\Privat.cs" />
-    <Compile Include="Models\Proprietate.cs" />
-    <Compile Include="Models\SpatiuComercial.cs" />
-    <Compile Include="Models\Teren.cs" />
-    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\AgentModel.cs" />
+    <Compile Include="Models\Anunturi_vanzareModel.cs" />
+    <Compile Include="Models\Anunturi_vizualizateModel.cs" />
+    <Compile Include="Models\ApartamentModel.cs" />
+    <Compile Include="Models\CasaModel.cs" />
+    <Compile Include="Models\LegaturaPrivatAgentModel.cs" />
+    <Compile Include="Models\PrivatModel.cs" />
+    <Compile Include="Models\ProprietateModel.cs" />
+    <Compile Include="Models\SpatiuComercialModel.cs" />
+    <Compile Include="Models\TerenModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

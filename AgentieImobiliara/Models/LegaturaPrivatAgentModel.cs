@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace AgentieImobiliara.Models
 {
-    public class Anunturi_vizualizate:INotifyPropertyChanged
+    public class LegaturaPrivatAgentModel:INotifyPropertyChanged
     {
-        public int VizualizareID { get; set; }
-        public Privat Privat { get; set; }  //doar privatul isi poate vedea anunturile
-        public Anunturi_vanzare Anunturi_vanzare { get; set; }
-        public DateTime DataVizualizare { get; set; }
+        public int LegaturaID { get; set; }
+        public PrivatModel Privat { get; set; }
+        public ProprietateModel Proprietate { get; set; }
+        public AgentModel Agent { get; set; }
+        public string TipVanzare { get; set; } // 'Direct', 'Prin Agent'
 
         private readonly AgentieDataContext _context;
-        public Anunturi_vizualizate()
+        public LegaturaPrivatAgentModel()
         {
             _context = new AgentieDataContext();
         }
@@ -23,5 +24,6 @@ namespace AgentieImobiliara.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         //implementare metode
+
     }
 }

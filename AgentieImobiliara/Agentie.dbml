@@ -1,17 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AgentieImobiliaraDB" Class="AgentieDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=ANDREEA;Initial Catalog=AgentieImobiliaraDB;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="AgentieImobiliara.Properties.Settings" SettingsPropertyName="AgentieImobiliaraDBConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Agent" Member="Agents">
-    <Type Name="Agent">
-      <Column Name="AgentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NrLicenta" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="NumeAgentie" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="AdresaAgentie" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="AniExperienta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Agent_LegaturaPrivatAgent" Member="LegaturaPrivatAgents" ThisKey="AgentID" OtherKey="AgentID" Type="LegaturaPrivatAgent" />
-      <Association Name="User_Agent" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Anunturi_Vanzare" Member="Anunturi_Vanzares">
     <Type Name="Anunturi_Vanzare">
       <Column Name="AnuntID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -81,19 +69,9 @@
       <Column Name="AgentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TipVanzare" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Association Name="LegaturaPrivatAgent_Anunturi_Vanzare" Member="Anunturi_Vanzares" ThisKey="LegaturaID" OtherKey="LegaturaID" Type="Anunturi_Vanzare" />
-      <Association Name="Agent_LegaturaPrivatAgent" Member="Agent" ThisKey="AgentID" OtherKey="AgentID" Type="Agent" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Privat_LegaturaPrivatAgent" Member="Privat" ThisKey="PrivatID" OtherKey="PrivatID" Type="Privat" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Proprietate_LegaturaPrivatAgent" Member="Proprietate" ThisKey="ProprietateID" OtherKey="ProprietateID" Type="Proprietate" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Privat" Member="Privats">
-    <Type Name="Privat">
-      <Column Name="PrivatID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Localitate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Privat_Anunturi_vizualizate" Member="Anunturi_vizualizates" ThisKey="PrivatID" OtherKey="UtilizatorID" Type="Anunturi_vizualizate" />
-      <Association Name="Privat_LegaturaPrivatAgent" Member="LegaturaPrivatAgents" ThisKey="PrivatID" OtherKey="PrivatID" Type="LegaturaPrivatAgent" />
-      <Association Name="User_Privat" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Privat_LegaturaPrivatAgent" Member="Privat" ThisKey="PrivatID" OtherKey="PrivatID" Type="Privat" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Agent_LegaturaPrivatAgent" Member="Agent" ThisKey="AgentID" OtherKey="AgentID" Type="Agent" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Proprietate" Member="Proprietates">
@@ -148,14 +126,35 @@
       <Column Name="NrTelefon" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
       <Column Name="isActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="DataCreare" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="User_Agent" Member="Agents" ThisKey="UserID" OtherKey="UserID" Type="Agent" />
       <Association Name="User_Privat" Member="Privats" ThisKey="UserID" OtherKey="UserID" Type="Privat" />
+      <Association Name="User_Agent" Member="Agents" ThisKey="UserID" OtherKey="UserID" Type="Agent" />
     </Type>
   </Table>
   <Table Name="dbo.Judete" Member="Judetes">
     <Type Name="Judete">
       <Column Name="JudetID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Denumire" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Privat" Member="Privats">
+    <Type Name="Privat">
+      <Column Name="PrivatID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Privat_Anunturi_vizualizate" Member="Anunturi_vizualizates" ThisKey="PrivatID" OtherKey="UtilizatorID" Type="Anunturi_vizualizate" />
+      <Association Name="Privat_LegaturaPrivatAgent" Member="LegaturaPrivatAgents" ThisKey="PrivatID" OtherKey="PrivatID" Type="LegaturaPrivatAgent" />
+      <Association Name="User_Privat" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Agent" Member="Agents">
+    <Type Name="Agent">
+      <Column Name="AgentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NrLicenta" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="NumeAgentie" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AdresaAgentie" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="AniExperienta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Agent_LegaturaPrivatAgent" Member="LegaturaPrivatAgents" ThisKey="AgentID" OtherKey="AgentID" Type="LegaturaPrivatAgent" />
+      <Association Name="User_Agent" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
